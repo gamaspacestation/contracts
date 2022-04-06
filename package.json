@@ -1,0 +1,11 @@
+{
+  "name": "gama-contract-public",
+  "version": "1.0.0",
+  "description": "GAMAv2 Contracts",
+  "scripts": {
+    "flatten": "truffle-flattener contracts/GAMA.sol > flattened/GAMAFlattened.sol"
+  },
+  "devDependencies": {
+    "@openzeppelin/contracts": "^4.0.0"
+  }
+}
