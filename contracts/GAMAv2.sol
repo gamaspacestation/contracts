@@ -8,7 +8,7 @@ import "./@rarible/royalties/contracts/LibPart.sol";
 import "./@rarible/royalties/contracts/LibRoyaltiesV2.sol";
 
 
-/// By John Whitton (@johnwhitton), Aaron Li (@polymorpher)
+/// By John Whitton (github: johnwhitton), Aaron Li (github: polymorpher)
 contract GAMAv2 is ERC721G, Ownable, RoyaltiesV2Impl {
     bytes32 internal salt;
     uint256 public maxGamaTokens;
@@ -51,7 +51,6 @@ contract GAMAv2 is ERC721G, Ownable, RoyaltiesV2Impl {
         maxGamaTokens = _maxGamaTokens;
         mintPrice = _mintPrice;
         maxPerMint = _maxPerMint;
-
         baseUri = _baseUri;
         _contractUri = contractUri_;
     }
@@ -90,7 +89,7 @@ contract GAMAv2 is ERC721G, Ownable, RoyaltiesV2Impl {
         if (!_exists(tokenId)) revert URIQueryForNonexistentToken();
         uint256 tid = tokenId;
         if (tid >= offsetValue) {
-            tid = (startIndex + tid) % (maxGamaTokens - offsetValue) + offsetValue;
+            tid = ((startIndex + tid - offsetValue) % (maxGamaTokens - offsetValue)) + offsetValue ;
         }
 
         if (bytes(metadataUris[tokenId]).length == 0) {
@@ -172,10 +171,10 @@ contract GAMAv2 is ERC721G, Ownable, RoyaltiesV2Impl {
     }
 
     function toggleSaleState() external onlyOwner {
+        require ((saleIsActive || (offsetValue != 0)), "cannot start sale until airdrop is complete and offset set"); 
         saleIsActive = !saleIsActive;
         if (saleIsActive && !saleStarted) {
-            // This is a bug, but it doesn't matter  
-            saleStarted; 
+            saleStarted = true;
         }
     }
 
