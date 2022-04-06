@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "GAMAv2 Contracts",
   "scripts": {
-    "flatten": "truffle-flattener contracts/GAMA.sol > flattened/GAMAFlattened.sol"
+    "flatten": "truffle-flattener contracts/GAMAv2.sol > flattened/GAMAv2Flattened.sol"
   },
   "devDependencies": {
     "@openzeppelin/contracts": "^4.0.0"
